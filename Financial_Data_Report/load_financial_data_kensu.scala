@@ -5,7 +5,12 @@ import org.apache.spark.sql.SparkSession
 val spark = SparkSession
   .builder()
   .appName("Load Financial Data")
+  .config("spark.driver.extraClassPath", "kensu-dam-spark-collector-0.23.5-SNAPSHOT_spark-3.2.1.jar")
   .getOrCreate()
+
+implicit val ch = new io.kensu.dodd.sdk.ConnectHelper("conf.ini")
+io.kensu.dam.lineage.spark.lineage.Implicits.SparkSessionDAMWrapper(spark).track(ch.properties.get("dam.ingestion.url").map(_.toString), None)(ch.properties.toList:_*)
+
 
 def loadStock(year:String, month:String, stock:String):org.apache.spark.sql.DataFrame = {
   spark.read.format("csv")
