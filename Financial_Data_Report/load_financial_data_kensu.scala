@@ -36,9 +36,9 @@ microsoft_stock_df.show()
 val dfSeq = Seq(apple_stock_df, apptech_stock_df, buzzfeed_stock_df,eur_usd_df,imetal_df,microsoft_stock_df)
 val monthly_assets_df = dfSeq.reduce(_ union _)
 
-monthly_assets_df.registerTempTable("tmp_monthly_assets")
 monthly_assets_df.show()
 
 monthly_assets_df.write.mode("overwrite").save(s"datasources/$year/$month/monthly")
 
-sql("SELECT * FROM tmp_monthly_assets where symbol = 'MSFT'").write.mode("overwrite").csv("just_msft")
+monthly_assets_df.registerTempTable("tmp_monthly_assets")
+sql("SELECT * FROM tmp_monthly_assets where symbol = 'BZFD'").write.mode("overwrite").csv("just_bzfd")
