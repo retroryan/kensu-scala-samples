@@ -40,3 +40,5 @@ monthly_assets_df.registerTempTable("tmp_monthly_assets")
 monthly_assets_df.show()
 
 monthly_assets_df.write.mode("overwrite").save(s"datasources/$year/$month/monthly")
+
+sql("SELECT * FROM tmp_monthly_assets where symbol = 'MSFT'").write.mode("overwrite").csv("just_msft")
