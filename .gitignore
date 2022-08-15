@@ -1,5 +1,7 @@
 # OS specific
 .DS_Store
 monthly/
+just_msft/
+just_bzfd/
 
 conf.ini

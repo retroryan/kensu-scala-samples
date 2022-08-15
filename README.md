@@ -18,4 +18,7 @@ The agent collects information inside the application to send it to Kensu. The a
 ## Run it with the spark shell
 
 
-```spark-shell -i --jars kensu-dam-spark-collector-0.23.5-SNAPSHOT_spark-3.2.1.jar,sdk_2.12.jar load_financial_data.scala```
+```spark-shell -i --jars kensu-dam-spark-collector-0.24.1-alpha220811131741_spark-3.2.1.jar,sdk_2.12.jar load_financial_data_kensu.scala
+
+spark-shell -i --jars kensu-dam-spark-collector-0.24.1-alpha220811131741_spark-3.2.1.jar,sdk_2.12.jar reporting_spark_v1.scala
+```

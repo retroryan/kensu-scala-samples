@@ -18,11 +18,13 @@ def loadStock(year:String, month:String, stock:String):org.apache.spark.sql.Data
     .option("inferSchema", "true")
     .load(s"datasources/$year/$month/$stock.csv")
     .withColumnRenamed("Adj Close", "AdjClose")
-    .withColumn("Intraday_Delta", expr("AdjClose - Open"))
 }
 
+//    .withColumn("Intraday_Delta", expr("AdjClose - Open"))
+
+
 val year = "2021"
-val month = "dec"
+val month = "nov"
 
 val apple_stock_df = loadStock(year,month, "Apple")
 val apptech_stock_df = loadStock(year,month, "AppTech")
@@ -41,4 +43,6 @@ monthly_assets_df.show()
 monthly_assets_df.write.mode("overwrite").save(s"datasources/$year/$month/monthly")
 
 monthly_assets_df.registerTempTable("tmp_monthly_assets")
-sql("SELECT * FROM tmp_monthly_assets where symbol = 'BZFD'").write.mode("overwrite").csv("just_bzfd")
+
+
+//sql("SELECT * FROM tmp_monthly_assets where symbol = 'BZFD'").write.mode("overwrite").csv("just_bzfd")
